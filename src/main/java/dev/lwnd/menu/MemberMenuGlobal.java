@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.jline.terminal.Terminal;
 
@@ -26,7 +27,7 @@ public class MemberMenuGlobal {
 
     /**
      * Displays the member management menu and handles user input.
-     * 
+     *
      * @param terminal The terminal object used for input/output.
      * @param library The library object containing the member collection and borrower catalogue.
      * @param currentMember The currently logged in member.
@@ -59,7 +60,7 @@ public class MemberMenuGlobal {
             System.out.println("Enter your choice: ");
             int choice = 0;
             try {
-                choice = Integer.parseInt(System.console().readLine());
+                choice = Integer.parseInt(new Scanner(System.in).nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input");
             }
@@ -81,7 +82,7 @@ public class MemberMenuGlobal {
 
     /**
      * Registers a new member in the library.
-     * 
+     *
      * @param library The library object containing the member collection.
      * @return The newly registered member.
      */
@@ -91,11 +92,10 @@ public class MemberMenuGlobal {
         Member user = null;
         while (user == null) {
             System.out.println("Enter username:");
-            String username = System.console().readLine();
+            String username = new Scanner(System.in).nextLine();
             try {
                 library.getMemberCollection().getMember(username);
                 System.out.println("Username already exists");
-                continue;
             } catch (Exception e) {
                 user = new Member(username);
             }
@@ -105,7 +105,7 @@ public class MemberMenuGlobal {
 
     /**
      * Logs in an existing member in the library.
-     * 
+     *
      * @param library The library object containing the member collection.
      * @return The logged in member.
      */
@@ -115,12 +115,11 @@ public class MemberMenuGlobal {
         Member user = null;
         while (user == null) {
             System.out.println("Enter username:");
-            String username = System.console().readLine();
+            String username = new Scanner(System.in).nextLine();
             try {
                 user = library.getMemberCollection().getMember(username);
             } catch (Exception e) {
                 System.out.println("Username does not exist");
-                continue;
             }
         }
         return user;
@@ -128,7 +127,7 @@ public class MemberMenuGlobal {
 
     /**
      * Displays a list of borrowers and the books they have borrowed.
-     * 
+     *
      * @param library The library object containing the borrower catalogue.
      */
     static void ViewBorrowers(Library library) {
@@ -140,13 +139,13 @@ public class MemberMenuGlobal {
         for (Member borrower : borrowers) {
             System.out.println(borrower.getUsername() + " borrowed: ");
             for (Book book : borrowerCatalogue.getBooksOfBorrower(borrower)) {
-                System.out.println("    " + book.getTitle() + " by " + book.getAuthor() + " published on " + new SimpleDateFormat("YYYY.MM.dd").format(book.getPublicationDate()));
+                System.out.println("    " + book.getTitle() + " by " + book.getAuthor() + " published on " + new SimpleDateFormat("yyyy.MM.dd").format(book.getPublicationDate()));
             }
             System.out.println();
             System.out.println();
             System.out.println();
         }
         System.out.println("Press enter to continue");
-        System.console().readLine();
+        new Scanner(System.in).nextLine();
     }
 }

@@ -2,6 +2,7 @@ package dev.lwnd.menu;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 import org.jline.terminal.Terminal;
 
@@ -15,7 +16,7 @@ import dev.lwnd.util.ScreenUtil;
  * Extends the LocalMenu class.
  */
 public class AddBookMenu extends LocalMenu {
-    private BookCollection bookCollection;
+    private final BookCollection bookCollection;
 
     /**
      * Constructs an AddBookMenu object.
@@ -41,17 +42,17 @@ public class AddBookMenu extends LocalMenu {
     void runMenu() {
         ScreenUtil.clearScreen();
         System.out.println("Enter book title:");
-        String title = System.console().readLine();
+        String title = new Scanner(System.in).nextLine();
 
         System.out.println("Enter book author:");
-        String author = System.console().readLine();
+        String author = new Scanner(System.in).nextLine();
 
         System.out.println("Enter book publication year:");
         boolean validYear = false;
         int publicationYear = 0;
-        while (validYear == false) {
+        while (!validYear) {
             try {
-                publicationYear = Integer.parseInt(System.console().readLine());
+                publicationYear = Integer.parseInt(new Scanner(System.in).nextLine());
                 validYear = true;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input");
@@ -61,9 +62,9 @@ public class AddBookMenu extends LocalMenu {
         System.out.println("Enter book publication month:");
         boolean validMonth = false;
         int publicationMonth = 0;
-        while (validMonth == false) {
+        while (!validMonth) {
             try {
-                publicationMonth = Integer.parseInt(System.console().readLine());
+                publicationMonth = Integer.parseInt(new Scanner(System.in).nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input");
             }
@@ -78,9 +79,9 @@ public class AddBookMenu extends LocalMenu {
         System.out.println("Enter book publication day:");
         int publicationDay = 0;
         boolean validDay = false;
-        while (validDay == false) {
+        while (!validDay) {
             try {
-                publicationDay = Integer.parseInt(System.console().readLine());
+                publicationDay = Integer.parseInt(new Scanner(System.in).nextLine());
                 validDay = true;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input");
@@ -96,8 +97,6 @@ public class AddBookMenu extends LocalMenu {
                 } else if ((publicationMonth == 4 || publicationMonth == 6 || publicationMonth == 9 || publicationMonth == 11) && publicationDay > 30) {
                     System.out.println("Invalid input");
                     validDay = false;
-                } else {
-                    validDay = true;
                 }
             }
         }

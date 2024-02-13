@@ -10,8 +10,8 @@ import dev.lwnd.Library;
  * It provides methods to add books to the collection and finally build the BookCollection.
  */
 public class BookCollectionBuilder {
-    private List<Book> books;
-    private BookCollection bookCollection;
+    private final List<Book> books;
+    private final BookCollection bookCollection;
 
     /**
      * Constructs a new BookCollectionBuilder object with the given Library.

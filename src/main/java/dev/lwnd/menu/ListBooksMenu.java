@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.jline.terminal.Terminal;
 
@@ -19,9 +20,8 @@ import dev.lwnd.util.ScreenUtil;
  * sort the books by different criteria, and view detailed information about a selected book.
  */
 public class ListBooksMenu extends LocalMenu {
-    private BookCollection bookCollection;
-    private Map<String, Runner> menuFuncs = new LinkedHashMap<>();
-
+    private final Map<String, Runner> menuFuncs = new LinkedHashMap<>();
+    private final BookCollection bookCollection;
     private Book pickedBook;
     private List<Book> books;
 
@@ -34,8 +34,8 @@ public class ListBooksMenu extends LocalMenu {
      */
     public ListBooksMenu(Terminal terminal, BookCollection bookCollection) {
         super(terminal);
-        this.bookCollection = bookCollection;
 
+        this.bookCollection = bookCollection;
         books = bookCollection.getAllBooks();
 
         runMenu();
@@ -63,17 +63,19 @@ public class ListBooksMenu extends LocalMenu {
                 pickedBook.toConsole();
 
                 System.out.println("Press enter to continue");
-                System.console().readLine();
+                new Scanner(System.in).nextLine();
             });
             menuFuncs.put("Sort by Title", () -> books = BookCollection.sortByTitle(bookCollection.getAllBooks()));
             menuFuncs.put("Sort by Author", () -> books = BookCollection.sortByAuthor(bookCollection.getAllBooks()));
             menuFuncs.put("Sort by Publication Date", () -> books = BookCollection.sortByPublicationDate(bookCollection.getAllBooks()));
 
             for (Book book : books) {
-                System.out.println(book.getTitle() + " by " + book.getAuthor() + " published on " + new SimpleDateFormat("YYYY.MM.dd").format(book.getPublicationDate()));
+                System.out.println(book.getTitle() +
+                                   " by " + book.getAuthor() +
+                                   " published on " + new SimpleDateFormat("yyyy.MM.dd").format(book.getPublicationDate()));
             }
 
-            Integer i = 1;
+            int i = 1;
             for (String menuName : menuFuncs.keySet()) {
                 System.out.println(i + ". " + menuName);
                 i++;
@@ -83,7 +85,7 @@ public class ListBooksMenu extends LocalMenu {
             System.out.println("Enter your choice: ");
             int choice = 0;
             try {
-                choice = Integer.parseInt(System.console().readLine());
+                choice = Integer.parseInt(new Scanner(System.in).nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input");
             }
@@ -93,7 +95,7 @@ public class ListBooksMenu extends LocalMenu {
                 return;
             }
 
-            Integer j = 1;
+            int j = 1;
             for (String menuName : menuFuncs.keySet()) {
                 if (choice == j) {
                     menuFuncs.get(menuName).run();

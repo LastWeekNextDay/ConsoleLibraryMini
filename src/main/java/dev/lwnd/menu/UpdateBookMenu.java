@@ -3,6 +3,7 @@ package dev.lwnd.menu;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 import org.jline.terminal.Terminal;
 
@@ -21,7 +22,7 @@ public class UpdateBookMenu extends LocalMenu {
 
     /**
      * Constructs an UpdateBookMenu object.
-     * 
+     *
      * @param terminal       the terminal used for input/output
      * @param bookCollection the collection of books in the library
      */
@@ -41,7 +42,7 @@ public class UpdateBookMenu extends LocalMenu {
         ScreenUtil.clearScreen();
 
         System.out.println("Select book to modify. Press enter to continue...");
-        System.console().readLine();
+        new Scanner(System.in).nextLine();
 
         Book book = BookCollection.searchBookMenu(terminal, bookCollection.getAllBooks());
         if (book == null) {
@@ -59,7 +60,7 @@ public class UpdateBookMenu extends LocalMenu {
         System.out.println("Enter your choice: ");
         int choice = 0;
         try {
-            choice = Integer.parseInt(System.console().readLine());
+            choice = Integer.parseInt(new Scanner(System.in).nextLine());
         } catch (NumberFormatException e) {
             System.out.println("Invalid input");
         }
@@ -76,25 +77,25 @@ public class UpdateBookMenu extends LocalMenu {
                 System.out.println(book.getTitle());
                 System.out.println("_______________");
                 System.out.println("Enter new title:");
-                newTitle = System.console().readLine();
+                newTitle = new Scanner(System.in).nextLine();
                 break;
             case 2:
                 System.out.println("___OLD AUTHOR___");
                 System.out.println(book.getAuthor());
                 System.out.println("_________________");
                 System.out.println("Enter new author:");
-                newAuthor = System.console().readLine();
+                newAuthor = new Scanner(System.in).nextLine();
                 break;
             case 3:
                 System.out.println("___OLD PUBLICATION DATE___");
-                System.out.println(new SimpleDateFormat("YYYY.MM.dd").format(book.getPublicationDate()));
+                System.out.println(new SimpleDateFormat("yyyy.MM.dd").format(book.getPublicationDate()));
                 System.out.println("___________________________");
                 System.out.println("Enter new publication year:");
                 boolean validYear = false;
                 int publicationYear = 0;
-                while (validYear == false) {
+                while (!validYear) {
                     try {
-                        publicationYear = Integer.parseInt(System.console().readLine());
+                        publicationYear = Integer.parseInt(new Scanner(System.in).nextLine());
                         validYear = true;
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid input");
@@ -104,9 +105,9 @@ public class UpdateBookMenu extends LocalMenu {
                 System.out.println("Enter new publication month:");
                 boolean validMonth = false;
                 int publicationMonth = 0;
-                while (validMonth == false) {
+                while (!validMonth) {
                     try {
-                        publicationMonth = Integer.parseInt(System.console().readLine());
+                        publicationMonth = Integer.parseInt(new Scanner(System.in).nextLine());
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid input");
                     }
@@ -121,9 +122,9 @@ public class UpdateBookMenu extends LocalMenu {
                 System.out.println("Enter new publication day:");
                 int publicationDay = 0;
                 boolean validDay = false;
-                while (validDay == false) {
+                while (!validDay) {
                     try {
-                        publicationDay = Integer.parseInt(System.console().readLine());
+                        publicationDay = Integer.parseInt(new Scanner(System.in).nextLine());
                         validDay = true;
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid input");
@@ -138,8 +139,6 @@ public class UpdateBookMenu extends LocalMenu {
                         } else if ((publicationMonth == 4 || publicationMonth == 6 || publicationMonth == 9 || publicationMonth == 11) && publicationDay > 30) {
                             System.out.println("Invalid input");
                             validDay = false;
-                        } else {
-                            validDay = true;
                         }
                     }
                 }
@@ -148,8 +147,6 @@ public class UpdateBookMenu extends LocalMenu {
                 calendar.set(publicationYear, publicationMonth - 1, publicationDay);
                 newPublicationDate = calendar.getTime();
                 break;
-            case 4:
-                return;
             default:
                 return;
         }

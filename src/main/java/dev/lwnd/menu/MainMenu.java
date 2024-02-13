@@ -2,6 +2,7 @@ package dev.lwnd.menu;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.jline.terminal.Terminal;
 
@@ -17,11 +18,11 @@ import dev.lwnd.util.ScreenUtil;
  * It allows users to select different options such as book management and user management.
  */
 public class MainMenu extends LocalMenu{
-    private Library library;
+    private final Library library;
 
     private Member currentMember;
 
-    private Map<String, Runner> menuFuncs = new HashMap<>();
+    private final Map<String, Runner> menuFuncs = new HashMap<>();
 
     /**
      * Constructs a MainMenu object with the specified terminal and library.
@@ -51,7 +52,7 @@ public class MainMenu extends LocalMenu{
     @MenuEntry
     void runMenu(){
         while (true) {
-            ScreenUtil.clearScreen();  
+            ScreenUtil.clearScreen();
 
             menuFuncs.clear();
             menuFuncs.put("Book Management", () -> new BookManagementMenu(terminal, library.getBookCollection(), currentMember));
@@ -71,7 +72,7 @@ public class MainMenu extends LocalMenu{
             System.out.println("Enter your choice: ");
             int choice = 0;
             try {
-                choice = Integer.parseInt(System.console().readLine());
+                choice = Integer.parseInt(new Scanner(System.in).nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input");
             }
@@ -81,7 +82,7 @@ public class MainMenu extends LocalMenu{
                 continue;
             }
 
-            Integer j = 1;
+            int j = 1;
             for (String menuName : menuFuncs.keySet()) {
                 if (choice == i) {
                     System.exit(0);

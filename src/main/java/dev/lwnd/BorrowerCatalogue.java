@@ -48,7 +48,7 @@ public class BorrowerCatalogue {
      * @param book   the book to be removed from the member's list of borrowed books
      */
     public void removeBookFromBorrower(Member member, Book book) {
-        if (hasBorrower(member) == false) {
+        if (!hasBorrower(member)) {
             return;
         }
 
@@ -61,7 +61,7 @@ public class BorrowerCatalogue {
      * @param member the member to be removed from the catalogue
      */
     public void removeBorrower(Member member) {
-        if (hasBorrower(member) == false) {
+        if (!hasBorrower(member)) {
             return;
         }
 
@@ -75,7 +75,7 @@ public class BorrowerCatalogue {
      * @return the list of books borrowed by the member, or null if the member is not found
      */
     public List<Book> getBooksOfBorrower(Member member) {
-        if (hasBorrower(member) == false) {
+        if (!hasBorrower(member)) {
             return null;
         }
 

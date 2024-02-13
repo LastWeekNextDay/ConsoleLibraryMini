@@ -2,6 +2,7 @@ package dev.lwnd.menu;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.jline.terminal.Terminal;
 
@@ -16,13 +17,13 @@ import dev.lwnd.util.ScreenUtil;
  * It allows users to perform various operations such as adding, removing, updating, borrowing, and listing books.
  */
 public class BookManagementMenu extends LocalMenu {
-    private BookCollection bookCollection;
-    private Member currentMember;
-    private Map<String, Runner> menuFuncs = new LinkedHashMap<>();
+    private final BookCollection bookCollection;
+    private final Member currentMember;
+    private final Map<String, Runner> menuFuncs = new LinkedHashMap<>();
 
     /**
      * Constructs a BookManagementMenu object with the specified terminal, book collection, and current member.
-     * 
+     *
      * @param terminal The terminal used for displaying the menu.
      * @param bookCollection The collection of books in the library.
      * @param currentMember The current member accessing the menu.
@@ -31,7 +32,7 @@ public class BookManagementMenu extends LocalMenu {
         super(terminal);
         this.bookCollection = bookCollection;
         this.currentMember = currentMember;
-        
+
         runMenu();
     }
 
@@ -62,21 +63,21 @@ public class BookManagementMenu extends LocalMenu {
                 i++;
             }
             System.out.println(i + ". Back");
-            
+
             System.out.println("Enter your choice: ");
             int choice = 0;
             try {
-                choice = Integer.parseInt(System.console().readLine());
+                choice = Integer.parseInt(new Scanner(System.in).nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input");
             }
-        
+
             if (choice < 1 || choice > menuFuncs.size() + 1) {
                 System.out.println("Invalid input");
                 continue;
             }
 
-            Integer j = 1;
+            int j = 1;
             for (String menuName : menuFuncs.keySet()) {
                 if (choice == j) {
                     menuFuncs.get(menuName).run();

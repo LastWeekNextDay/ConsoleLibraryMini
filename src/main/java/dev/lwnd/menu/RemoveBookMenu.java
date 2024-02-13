@@ -14,11 +14,11 @@ import dev.lwnd.util.ScreenUtil;
  * and remove a book based on the user's input.
  */
 public class RemoveBookMenu extends LocalMenu {
-    private BookCollection bookCollection;
-    
+    private final BookCollection bookCollection;
+
     /**
      * Constructs a RemoveBookMenu object with the specified terminal and book collection.
-     * 
+     *
      * @param terminal the terminal used for user input and output
      * @param bookCollection the book collection from which the book will be removed
      */
@@ -26,7 +26,7 @@ public class RemoveBookMenu extends LocalMenu {
         super(terminal);
         this.terminal = terminal;
         this.bookCollection = bookCollection;
-        
+
         runMenu();
     }
 
@@ -36,7 +36,7 @@ public class RemoveBookMenu extends LocalMenu {
      * Displays an error message if the book is not found in the collection.
      */
     @MenuEntry
-    void runMenu() {    
+    void runMenu() {
         Book book = BookCollection.searchBookMenu(terminal, bookCollection.getAllBooks());
 
         if (book == null) {

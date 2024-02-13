@@ -3,6 +3,8 @@ package dev.lwnd.member;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import org.jline.terminal.Terminal;
 import org.jline.utils.NonBlockingReader;
 
@@ -15,12 +17,12 @@ import dev.lwnd.util.ScreenUtil;
  */
 @ObjectDescription(description = "Represents a collection of members in a library.")
 public class MemberCollection {
-    private List<Member> members;
-    private Library membersOfLibrary;
+    private final List<Member> members;
+    private final Library membersOfLibrary;
 
     /**
      * Constructs a MemberCollection object with the specified library.
-     * 
+     *
      * @param library the library associated with the member collection
      */
     public MemberCollection(Library library) {
@@ -30,7 +32,7 @@ public class MemberCollection {
 
     /**
      * Constructs a MemberCollection object with the specified library and members.
-     * 
+     *
      * @param library the library associated with the member collection
      * @param members the initial members to be added to the collection
      */
@@ -41,7 +43,7 @@ public class MemberCollection {
 
     /**
      * Returns the library associated with the member collection.
-     * 
+     *
      * @return the library associated with the member collection
      */
     public Library getMembershipLibrary() {
@@ -50,7 +52,7 @@ public class MemberCollection {
 
     /**
      * Adds a member to the collection.
-     * 
+     *
      * @param member the member to be added
      */
     public void addMember(Member member) {
@@ -59,7 +61,7 @@ public class MemberCollection {
 
     /**
      * Adds multiple members to the collection.
-     * 
+     *
      * @param members the members to be added
      */
     public void addMembers(List<Member> members) {
@@ -68,7 +70,7 @@ public class MemberCollection {
 
     /**
      * Removes a member from the collection.
-     * 
+     *
      * @param member the member to be removed
      * @throws MemberNotFoundException if the member is not found in the collection
      */
@@ -80,7 +82,7 @@ public class MemberCollection {
 
     /**
      * Retrieves a member from the collection based on the username.
-     * 
+     *
      * @param username the username of the member to retrieve
      * @return the member with the specified username
      * @throws MemberNotFoundException if the member is not found in the collection
@@ -96,7 +98,7 @@ public class MemberCollection {
 
     /**
      * Checks if a member with the specified username exists in the collection.
-     * 
+     *
      * @param username the username to check
      * @return true if a member with the specified username exists, false otherwise
      */
@@ -111,7 +113,7 @@ public class MemberCollection {
 
     /**
      * Returns a copy of all members in the collection.
-     * 
+     *
      * @return a list of all members in the collection
      */
     public List<Member> getAllMembers() {
@@ -120,7 +122,7 @@ public class MemberCollection {
 
     /**
      * Displays a menu for searching members based on username.
-     * 
+     *
      * @param terminal the terminal to display the menu on
      * @param members the list of members to search from
      * @return the selected member or null if no member is selected
@@ -130,18 +132,18 @@ public class MemberCollection {
 
         List<Member> filteredMembers = new ArrayList<>();
 
-        String input = "";
+        StringBuilder input = new StringBuilder();
         while (true) {
             ScreenUtil.clearScreen();
             filteredMembers.clear();
-            
+
             System.out.println("1. Type username");
             System.out.println("2. If you are satisfied with the list, press enter");
             System.out.println("3. Select member from list using index or type -1 to go back");
             System.out.println("___________________________________________________________");
-            
+
             for (Member member : members) {
-                if (member.getUsername().toLowerCase().contains(input.toLowerCase())) {
+                if (member.getUsername().toLowerCase().contains(input.toString().toLowerCase())) {
                     filteredMembers.add(member);
                 }
             }
@@ -163,10 +165,10 @@ public class MemberCollection {
                 break;
             } else if (ch == '\b'){
                 if (!input.isEmpty()) {
-                    input = input.substring(0, input.length() - 1);
+                    input = new StringBuilder(input.substring(0, input.length() - 1));
                 }
             } else {
-                input += (char) ch;
+                input.append((char) ch);
             }
         }
 
@@ -182,7 +184,7 @@ public class MemberCollection {
                 System.out.println("Enter index: ");
                 int index = 0;
                 try {
-                    index = Integer.parseInt(System.console().readLine());
+                    index = Integer.parseInt(new Scanner(System.in).nextLine());
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input");
                 }
@@ -199,7 +201,7 @@ public class MemberCollection {
 
     /**
      * Filters the members based on the admin rights.
-     * 
+     *
      * @param members the list of members to filter
      * @param hasAdminRights true to filter members with admin rights, false to filter members without admin rights
      * @return a list of members that match the specified admin rights

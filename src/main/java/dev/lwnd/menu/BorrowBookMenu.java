@@ -14,9 +14,9 @@ import dev.lwnd.other.MenuEntry;
  * Extends the LocalMenu class.
  */
 public class BorrowBookMenu extends LocalMenu {
-    private BookCollection bookCollection;
-    private Library library;
-    private Member member;
+    private final BookCollection bookCollection;
+    private final Library library;
+    private final Member member;
 
     /**
      * Constructs a BorrowBookMenu object with the specified terminal, book collection, library, and member.
@@ -52,6 +52,5 @@ public class BorrowBookMenu extends LocalMenu {
         }
 
         borrowerCatalogue.addBookToBorrower(member, book);
-        return;
     }
 }

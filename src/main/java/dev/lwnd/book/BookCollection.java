@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import org.jline.terminal.Terminal;
 import org.jline.utils.NonBlockingReader;
@@ -17,8 +18,8 @@ import dev.lwnd.util.ScreenUtil;
  */
 @ObjectDescription(description = "Represents a collection of books in a library.")
 public class BookCollection {
-    private List<Book> books;
-    private Library owningLibrary;
+    private final List<Book> books;
+    private final Library owningLibrary;
 
     /**
      * Constructs a new BookCollection object with the specified owning library.
@@ -188,7 +189,7 @@ public class BookCollection {
      */
     public static List<Book> sortByTitle(List<Book> books) {
         List<Book> sortedBooks = new ArrayList<>(books);
-        Collections.sort(sortedBooks, new BookTitleComparator());
+        sortedBooks.sort(new BookTitleComparator());
         return sortedBooks;
     }
 
@@ -200,7 +201,7 @@ public class BookCollection {
      */
     public static List<Book> sortByAuthor(List<Book> books) {
         List<Book> sortedBooks = new ArrayList<>(books);
-        Collections.sort(sortedBooks, new BookAuthorComparator());
+        sortedBooks.sort(new BookAuthorComparator());
         return sortedBooks;
     }
 
@@ -212,7 +213,7 @@ public class BookCollection {
      */
     public static List<Book> sortByPublicationDate(List<Book> books) {
         List<Book> sortedBooks = new ArrayList<>(books);
-        Collections.sort(sortedBooks, new BookPublicationDateComparator());
+        sortedBooks.sort(new BookPublicationDateComparator());
         return sortedBooks;
     }
 
@@ -228,7 +229,7 @@ public class BookCollection {
 
         List<Book> filteredBooks = new ArrayList<>();
 
-        String input = "";
+        StringBuilder input = new StringBuilder();
         while (true) {
             ScreenUtil.clearScreen();
             filteredBooks.clear();
@@ -239,7 +240,7 @@ public class BookCollection {
             System.out.println("___________________________________________________________");
 
             for (Book book : books) {
-                if (book.getTitle().toLowerCase().contains(input.toLowerCase())) {
+                if (book.getTitle().toLowerCase().contains(input.toString().toLowerCase())) {
                     filteredBooks.add(book);
                 }
             }
@@ -247,7 +248,7 @@ public class BookCollection {
                 System.out.println(i + ". " + filteredBooks.get(i).getTitle());
             }
 
-            System.out.println("Enter title: " + input);
+            System.out.println("Enter title: \n" + input);
 
             int ch;
             try {
@@ -261,10 +262,10 @@ public class BookCollection {
                 break;
             } else if (ch == '\b') {
                 if (!input.isEmpty()) {
-                    input = input.substring(0, input.length() - 1);
+                    input = new StringBuilder(input.substring(0, input.length() - 1));
                 }
             } else {
-                input += (char) ch;
+                input.append((char) ch);
             }
         }
 
@@ -280,7 +281,7 @@ public class BookCollection {
                 System.out.println("Enter index: ");
                 int index = 0;
                 try {
-                    index = Integer.parseInt(System.console().readLine());
+                    index = Integer.parseInt(new Scanner(System.in).nextLine());
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input");
                 }

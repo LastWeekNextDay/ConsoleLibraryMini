@@ -13,7 +13,6 @@ import dev.lwnd.menu.MainMenu;
  * It provides methods for initializing the library, creating a terminal, and starting the main menu.
  */
 public class LibraryConsole {
-    private Library library;
 
     /**
      * Constructs a LibraryConsole object and runs the console interface.
@@ -26,7 +25,7 @@ public class LibraryConsole {
      * Initializes the library, creates a terminal, and starts the main menu.
      */
     void run(){
-        library = new Library();
+        Library library = new Library();
 
         Terminal terminal;
         try {

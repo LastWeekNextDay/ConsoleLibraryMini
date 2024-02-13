@@ -1,0 +1,13 @@
+-Xajruntimetarget:1.5
+-encoding
+UTF-8
+-21
+-classpath
+C:\Users\LastWeek\.m2\repository\org\aspectj\aspectjtools\1.9.21\aspectjtools-1.9.21.jar;C:\Users\LastWeek\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\LastWeek\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\LastWeek\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\LastWeek\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\LastWeek\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\LastWeek\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;C:\Users\LastWeek\.m2\repository\org\apache\commons\commons-lang3\3.9\commons-lang3-3.9.jar;C:\Users\LastWeek\.m2\repository\org\jline\jline\3.25.1\jline-3.25.1.jar;C:\Users\LastWeek\.m2\repository\org\fusesource\jansi\jansi\2.4.1\jansi-2.4.1.jar;C:\Users\LastWeek\.m2\repository\org\aspectj\aspectjrt\1.9.21\aspectjrt-1.9.21.jar;C:\Users\LastWeek\ConsoleLibraryMini\target\test-classes;C:\Users\LastWeek\ConsoleLibraryMini\target\classes
+-aspectpath
+C:\Users\LastWeek\ConsoleLibraryMini\target\classes
+-d
+C:\Users\LastWeek\ConsoleLibraryMini\target\test-classes
+-s
+C:\Users\LastWeek\ConsoleLibraryMini\target\generated-test-sources\aspectj-maven-plugin
+C:\Users\LastWeek\ConsoleLibraryMini\src\test\java\dev\lwnd\AppTest.java

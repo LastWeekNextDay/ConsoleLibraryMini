@@ -9,9 +9,6 @@ import dev.lwnd.other.ObjectDescription;
 /**
  * Represents a book with a title, author, and publication date.
  */
-/**
- * Represents a book with a title, author, and publication date.
- */
 @Loggable
 @ObjectDescription(description = "Represents a book with a title, author, and publication date.")
 public class Book {
@@ -92,6 +89,6 @@ public class Book {
     public void toConsole() {
         System.out.println("Title: " + title);
         System.out.println("Author: " + author);
-        System.out.println("Publication date: " + new SimpleDateFormat("YYYY.MM.dd").format(publicationDate));
+        System.out.println("Publication date: " + new SimpleDateFormat("yyyy.MM.dd").format(publicationDate));
     }
 }

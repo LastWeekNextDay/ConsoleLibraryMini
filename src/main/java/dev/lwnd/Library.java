@@ -20,7 +20,7 @@ import dev.lwnd.other.ObjectDescription;
 public class Library {
     private BookCollection bookCollection;
     private MemberCollection memberCollection;
-    private BorrowerCatalogue borrowerCatalogue;
+    private final BorrowerCatalogue borrowerCatalogue;
 
     /**
      * Constructs a Library object and initializes the book collection, member collection,
@@ -65,9 +65,9 @@ public class Library {
      * Populates the book collection with a list of books.
      */
     void populateBookCollection() {
-        ArrayList<Book> books = new ArrayList<Book>();
+        ArrayList<Book> books = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
-        
+
         calendar.set(1954, Calendar.JULY, 29);
         books.add(new Book("The Lord of the Rings", "J. R. R. Tolkien", calendar.getTime()));
 
@@ -95,7 +95,7 @@ public class Library {
         calendar.set(1983, Calendar.OCTOBER, 1);
         books.add(new Book("The Book of Lost Tales 1", "J. R. R. Tolkien", calendar.getTime()));
 
-        for (int year = 2000; year <= 2000; year++) {
+        for (int year = 2000; year <= 2005; year++) {
             for (int month = Calendar.JANUARY; month <= Calendar.DECEMBER; month++) {
                 calendar.set(year, month, 1);
                 books.add(new Book("Book" + (month + 1), "Author" + (month + 1), calendar.getTime()));

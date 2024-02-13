@@ -10,7 +10,7 @@
     <junit.version>5.6.0</junit.version>
     <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-    <maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
+    <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
   </properties>
   <dependencies>
 
@@ -32,7 +32,7 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-  
+
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
@@ -43,7 +43,7 @@
     <dependency>
         <groupId>org.jline</groupId>
         <artifactId>jline</artifactId>
-        <version>3.25.0</version>
+        <version>3.25.1</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi -->

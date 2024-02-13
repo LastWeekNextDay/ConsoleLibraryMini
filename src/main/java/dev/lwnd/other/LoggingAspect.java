@@ -1,6 +1,9 @@
 package dev.lwnd.other;
 
-import java.io.File;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,10 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
-
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
 
 /**
  * This class represents an aspect for logging object creation in a Java application.
@@ -41,7 +40,7 @@ public class LoggingAspect {
             return;
         }
 
-        Path path = Paths.get("src/main/java/lt/nlav/logs");
+        Path path = Paths.get("src/main/java/dev/lwnd/logs");
         if (Files.notExists(path)) {
             try {
                 Files.createDirectory(path);
@@ -51,7 +50,7 @@ public class LoggingAspect {
             }
         }
 
-        Path logFilePathLocal = Paths.get(path.toString() + "/log.txt");
+        Path logFilePathLocal = Paths.get(path + "/log.txt");
         if (Files.notExists(logFilePathLocal)){
             try {
                 Files.createFile(logFilePathLocal);
@@ -70,11 +69,11 @@ public class LoggingAspect {
      * @param joinPoint The join point representing the object creation.
      */
     void LogObject(JoinPoint joinPoint) {
-        String text = new Date().toString() + ": Created object of class " 
+        String text = new Date() + ": Created object of class "
         + joinPoint.getTarget().getClass().getName() + " | "
         + joinPoint.getTarget().toString() + "\n";
         try {
-            OutputStream os = new FileOutputStream(new File(logFilePath.toString()), true);
+            OutputStream os = new FileOutputStream(logFilePath.toString(), true);
             os.write(text.getBytes(), 0, text.length());
             os.close();
         } catch (IOException e) {

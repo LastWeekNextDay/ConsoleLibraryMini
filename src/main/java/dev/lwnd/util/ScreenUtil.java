@@ -10,18 +10,25 @@ public class ScreenUtil {
      * Clears the screen based on the operating system.
      */
     public static void clearScreen() {
-        if (operatingSys.equals("")) {
+        if (operatingSys.isEmpty()) {
             operatingSys = System.getProperty("os.name");
         }
 
-        if (operatingSys.contains("Windows")) {
-            try {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } catch (Exception e) {
-                System.out.println("Error clearing screen");
+        if (System.console() == null) {
+            for (int i = 0; i < 100; i++) {
+                System.out.println("\n");
             }
-        } else {
-            throw new UnsupportedOperationException("Unsupported operating system");
+        } else  {
+            if (operatingSys.contains("Windows")) {
+                try {
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                } catch (Exception e) {
+                    System.out.println("Error clearing screen");
+                }
+            } else {
+                throw new UnsupportedOperationException("Unsupported operating system");
+            }
         }
+
     }
 }

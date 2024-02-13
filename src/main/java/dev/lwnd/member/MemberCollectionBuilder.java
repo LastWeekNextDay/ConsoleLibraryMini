@@ -11,8 +11,8 @@ import dev.lwnd.Library;
  * and a build method to finalize the construction of the MemberCollection.
  */
 public class MemberCollectionBuilder {
-    private List<Member> members;
-    private MemberCollection memberCollection;
+    private final List<Member> members;
+    private final MemberCollection memberCollection;
 
     /**
      * Constructs a new MemberCollectionBuilder object with the specified Library object.
